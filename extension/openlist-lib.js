@@ -17,15 +17,14 @@ function isProbablyUrl(string) {
         return false;
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
-
-async function removeNew (tab) {
-        await sleep(10000);
-        console.log("" + tab.url);
+function removeNew (tab) {
+        sleep(10000).then(() => {
+         console.log("" + tab.url);
         chrome.tabs.remove(tab.id);
-        return true;
+        })
 }
 
 function openList(list) {
@@ -47,3 +46,5 @@ function openList(list) {
                 chrome.tabs.create({'url':url,'selected':false},removeNew);
         }
 }
+
+
